@@ -1,0 +1,6 @@
+[
+  "core/tests.py::test_post",
+  "core/tests.py::test_get",
+  "core/tests.py::test_delete",
+  "core/tests.py::test_search"
+]

@@ -1,0 +1,120 @@
+<html ng-app="todo">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="//use.edgefonts.net/vast-shadow:n4:all.js"></script>
+    <script src="//use.edgefonts.net/vast-shadow:n4:all;megrim.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+   <script src="https://adminlte.io/themes/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+   <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+  <body>
+    <div ng-controller="TodoCtrl" class="container">
+      <div class="row">
+        <div class="col col-sm-6">
+          <div class="search-container">
+              <label>Search</label>
+              <input type="text" placeholder="Search.." name="search" ng-model="searchTerm">
+              <button type="submit" ng-click="search()"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+        <div class="col col-sm-2">
+          <label> Alert notification</label>
+          <input type="text" placeholder="Enter number of hours" ng-model="alert_time">
+        </div>
+        <div class="col col-sm-2">
+          <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Filter
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" ng-click="filter('today')">Today</a><br>
+              <a class="dropdown-item" ng-click="filter('thisweek')">This Week</a><br>
+              <a class="dropdown-item" ng-click="filter('nextweek')">Next week</a><br>
+              <a class="dropdown-item" ng-click="filter('overdue')">Overdue</a>
+            </div>
+          </div>
+          </div>
+      </div>
+      <div class="col-sm-12">
+        <ul class="list-group">
+          <li ng-repeat="(id,note) in todos | orderBy: 'due_date'" class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6">
+                <h1> <span ng-bind="note.title"></span></h1>
+                <h3><span ng-bind="note.subtask"></span></h3>
+                <span ng-bind="note.description"></span>  
+              </div>
+              <div class="col col-sm-2">
+                Due by: <span ng-bind="note.due_date"></span>
+              </div>
+              <div class="col-sm-2">
+                <div class="dropdown">
+                   <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span ng-show="note.is_completed" >Completed</span>
+                        <span ng-show="note.is_completed == false">Pending</span>
+                    </button>
+                  <div ng-hide="note.is_completed" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a  ng-hide="note.is_completed" class="dropdown-item" ng-click="markComplete(note.id)">Mark Completed</a>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col col-sm">
+                <button class="btn btn-danger" ng-click="delete(note.id)">Delete</button>
+              </div>
+            </div>
+            
+          </li>
+        </ul>
+      </div>
+      
+      <div class="col-sm-12">
+        <h4>New Task</h4>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" ng-model="newTitle">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" ng-model="newText"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Subtask</label>
+          <textarea class="form-control" ng-model="newTask" placeholder="Write comma seperated subtask here."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Due Date</label>
+          <div class="input-group date">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <input type="text" ng-model="dueDate" class="form-control pull-right" placeholder="dd/mm/yyyy">
+        </div>
+        </div>
+        <button class="btn btn-primary btn-block" ng-click="addTodo()">
+          Add note
+        </button>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    
+  // $(function () {
+  //   //Initialize Select2 Elements
+    
+
+  //   //Date picker
+  //   $('#datepicker').datepicker({
+  //     autoclose: true
+  //   })
+
+  // });
+
+
+  </script>
+</html>
