@@ -14,6 +14,7 @@ Most of the dependencies can be installed using
 Open your redis-server with following command
 `redis-server /usr/local/etc/redis.conf`
 Run Celery task with this command
+ `python3 manage.py migrate djcelery`
 `celery -A todo worker -l info -B`
 
 # Pytest
